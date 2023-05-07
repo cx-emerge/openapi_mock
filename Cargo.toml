@@ -1,0 +1,30 @@
+[package]
+name = "openapi_mock"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies.hyper]
+version = "1.0.0-rc.3"
+features = ["full"]
+
+[dependencies.tokio]
+version = "1.28.0"
+features = ["full"]
+
+[dependencies.http-body-util]
+version = "0.1.0-rc.2"
+
+[dependencies.clap]
+version = "4.2.7"
+features = ["derive"]
+
+[dependencies.serde]
+version = "1.0.162"
+
+[dependencies.serde_json]
+version = "1.0.96"
+
+[dependencies.serde_yaml]
+version = "0.9.21"
