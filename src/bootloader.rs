@@ -1,10 +1,15 @@
-use std::convert::Infallible;
-
 use http_body_util::Full;
 use hyper::body::Bytes;
 use hyper::{Request, Response};
+use oas3;
 
+pub async fn bootloader(
+	req: Request<hyper::body::Incoming>,
+) -> Result<Response<Full<Bytes>>, std::convert::Infallible> {
+	let path = req.uri().path().to_string();
 
-pub async fn bootloader(_: Request<hyper::body::Incoming>) -> Result<Response<Full<Bytes>>, Infallible> {
-    Ok(Response::new(Full::new(Bytes::from("Hello, World!"))))
+	let open_api_spec = oas3::from_path("examples/openapi.json").unwrap();
+	let version = open_api_spec.validate_version().unwrap().to_string();
+
+	Ok(Response::new(Full::new(Bytes::from(version))))
 }

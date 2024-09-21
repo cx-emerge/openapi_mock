@@ -1,0 +1,195 @@
+{
+	"openapi": "3.1.0",
+	"info": {
+		"version": "latest",
+		"title": "openapi_mock",
+		"license": { "name": "UNLICENSED" }
+	},
+	"servers": [
+		{
+			"url": "{protocol}//{host}{path_prefix}",
+			"variables": {
+				"protocol": { "default": "{{PROTOCOL}}" },
+				"host": { "default": "{{HOST}}" },
+				"path_prefix": { "default": "{{PATH_PREFIX}}" }
+			}
+		},
+		{
+			"url": "/api"
+		}
+	],
+	"tags": [
+		{
+			"name": "系统权鉴",
+			"description": "系统权鉴"
+		},
+		{
+			"name": "授权管理",
+			"description": "授权管理"
+		}
+	],
+
+	"paths": {
+		"/user/login": {
+			"post": {
+				"tags": ["系统权鉴"],
+				"summary": "登录",
+				"description": "登录",
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-mock-response-name",
+						"schema": {
+							"type": "string"
+						},
+						"example": "system_sign_in_0"
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"email": {
+										"description": "邮箱",
+										"type": "string"
+									},
+									"password": {
+										"description": "密码",
+										"type": "string"
+									}
+								},
+								"required": ["email", "password"]
+							},
+							"examples": {
+								"system_sign_in_0": {
+									"summary": "登录",
+									"value": {
+										"email": "dotouch@dotouch.com.cn",
+										"password": "dotouch"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "登录 0",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{ "$ref": "#/components/schemas/Response" },
+										{
+											"type": "object",
+											"properties": {
+												"api_token": {
+													"description": "令牌",
+													"type": "string"
+												}
+											}
+										}
+									]
+								},
+								"examples": {
+									"system_sign_in_0": {
+										"summary": "登录成功 0",
+										"value": {
+											"code": 0,
+											"api_token": "8|JEnm4O16jQufIdnAwb31J9Ib8E3AD4wwexFCj0fz",
+											"message": "登录成功"
+										}
+									},
+									"system_sign_in_1001": {
+										"summary": "登录失败 1001",
+										"value": {
+											"code": 1001,
+											"message": "登录失败"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+
+	"components": {
+		"schemas": {
+			"Response": {
+				"description": "响应",
+				"type": "object",
+				"properties": {
+					"code": {
+						"description": "返回码",
+						"type": "integer",
+						"minimum": 0
+					},
+					"message": {
+						"description": "消息",
+						"type": "string"
+					}
+				},
+				"required": ["code"]
+			},
+			"MetaPager": {
+				"description": "分页元数据",
+				"type": "object",
+				"properties": {
+					"meta": {
+						"type": "object",
+						"properties": {
+							"page": {
+								"description": "当前页",
+								"type": "integer",
+								"minimum": 0
+							},
+							"page_size": {
+								"description": "页码大小",
+								"type": "integer",
+								"minimum": 0
+							},
+							"total": {
+								"description": "总数",
+								"type": "integer",
+								"minimum": 0
+							}
+						}
+					}
+				}
+			},
+			"PageQuery": {
+				"description": "页码查询",
+				"type": "object",
+				"properties": {
+					"page": {
+						"description": "当前页",
+						"type": "integer",
+						"minimum": 1
+					},
+					"page_size": {
+						"description": "页码大小",
+						"type": "integer",
+						"minimum": 1
+					}
+				}
+			}
+		},
+		"securitySchemes": {
+			"BearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	},
+	"security": [
+		{ "BearerAuth": [] }
+	]
+}
