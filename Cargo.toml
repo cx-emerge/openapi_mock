@@ -9,7 +9,7 @@ version = '1.4.1'
 features = ['full']
 
 [dependencies.hyper-util]
-version = '0.1.8'
+version = '0.1.9'
 features = ['full']
 
 [dependencies.tokio]
@@ -20,7 +20,7 @@ features = ['full']
 version = '0.1.2'
 
 [dependencies.clap]
-version = '4.5.17'
+version = '4.5.19'
 features = ['derive']
 
 [dependencies.serde]
@@ -31,6 +31,9 @@ version = '1.0.128'
 
 [dependencies.serde_yaml]
 version = '0.9.33'
+
+[dependencies.regex]
+version = '1.11.0'
 
 [dependencies.oas3]
 version = '0.10.0'
