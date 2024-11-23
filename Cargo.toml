@@ -4,36 +4,14 @@ version = '0.1.0'
 edition = '2021'
 
 
-[dependencies.hyper]
-version = '1.4.1'
-features = ['full']
-
-[dependencies.hyper-util]
-version = '0.1.9'
-features = ['full']
-
-[dependencies.tokio]
-version = '1.40.0'
-features = ['full']
-
-[dependencies.http-body-util]
-version = '0.1.2'
-
-[dependencies.clap]
-version = '4.5.19'
-features = ['derive']
-
-[dependencies.serde]
-version = '1.0.210'
-
-[dependencies.serde_json]
-version = '1.0.128'
-
-[dependencies.serde_yaml]
-version = '0.9.33'
-
-[dependencies.regex]
-version = '1.11.0'
-
-[dependencies.oas3]
-version = '0.10.0'
+[dependencies]
+hyper = { version = '1.5.2', features = ['full'] }
+hyper-util = { version = '0.1.10', features = ['full'] }
+tokio = { version = '1.43.0', features = ['full'] }
+http-body-util = { version = '0.1.2' }
+clap = { version = '4.5.27', features = ['derive'] }
+serde = { version = '1.0.217' }
+serde_json = { version = '1.0.137' }
+serde_yaml = { version = '0.9.33' }
+regex = { version = '1.11.1' }
+oas3 = { version = '0.13.1' }
