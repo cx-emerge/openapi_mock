@@ -11,5 +11,7 @@ pub async fn bootloader(
 	let open_api_spec = oas3::from_path("examples/openapi.json").unwrap();
 	let version = open_api_spec.validate_version().unwrap().to_string();
 
-	Ok(Response::new(Full::new(Bytes::from(version))))
+	let response_body = format!("{}\n{}", path, version);
+
+	Ok(Response::new(Full::new(Bytes::from(response_body))))
 }
