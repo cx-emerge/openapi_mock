@@ -8,7 +8,10 @@ pub async fn bootloader(
 ) -> Result<Response<Full<Bytes>>, std::convert::Infallible> {
 	let path = req.uri().path().to_string();
 
-	let open_api_spec = oas3::from_path("examples/openapi.json").unwrap();
+    let openapi_content = std::fs::read_to_string("examples/openapi.json").unwrap();
+
+    let open_api_spec = oas3::from_json(openapi_content).unwrap();
+
 	let version = open_api_spec.validate_version().unwrap().to_string();
 
 	let response_body = format!("{}\n{}", path, version);
